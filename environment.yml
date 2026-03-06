@@ -1,0 +1,45 @@
+name: flood-risk-p01
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+
+  # ── Core geospatial stack (must be conda-forge for C-library bindings) ────
+  - geopandas=0.14
+  - shapely>=2.0
+  - fiona
+  - pyproj
+  - rasterio
+  - rtree
+  - libspatialindex
+
+  # ── Spatial analysis ──────────────────────────────────────────────────────
+  - libpysal
+  - esda
+  - osmnx
+
+  # ── Machine learning & stats ──────────────────────────────────────────────
+  - scikit-learn
+  - numpy
+  - scipy
+
+  # ── Data handling ─────────────────────────────────────────────────────────
+  - pandas
+  - requests
+
+  # ── Visualization ─────────────────────────────────────────────────────────
+  - matplotlib
+  - contextily
+
+  # ── Notebook environment ──────────────────────────────────────────────────
+  - jupyter
+  - jupyterlab
+  - ipykernel
+  - ipywidgets
+
+  # ── pip-only packages ─────────────────────────────────────────────────────
+  - pip:
+    - folium
+    - pysal
