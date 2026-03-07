@@ -9,6 +9,13 @@ An end-to-end spatial machine learning pipeline that predicts flood vulnerabilit
 
 ---
 
+## Interactive Map
+
+> 📍 **[View the Live Flood Risk Map](https://Suvamp.githug.io/urban-flood-risk-harris-county/blob/main/outputs/flood_vulnerability_harris_county.html)**
+
+
+---
+
 ## Key Results
 
 | Metric | Value |
