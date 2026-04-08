@@ -11,7 +11,7 @@ An end-to-end spatial machine learning pipeline that predicts flood vulnerabilit
 
 ## Interactive Map
 
-> 📍 **[View the Live Flood Risk Map](https://Suvamp.githuh.io/urban-flood-risk-harris-county/outputs/flood_vulnerability_harris_county.html)**
+> 📍 **[View the Live Flood Risk Map](https://Suvamp.github.io/urban-flood-risk-harris-county/outputs/flood_vulnerability_harris_county.html)**
 
 *Hover over any census tract to see its vulnerability score, risk tier, poverty rate, and distance to nearest waterway. Toggle the LISA cluster layer on/off using the layer control.*
 
