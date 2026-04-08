@@ -11,8 +11,9 @@ An end-to-end spatial machine learning pipeline that predicts flood vulnerabilit
 
 ## Interactive Map
 
-> 📍 **[View the Live Flood Risk Map](https://Suvamp.github.io/urban-flood-risk-harris-county/outputs/flood_vulnerability_harris_county.html)**
+> 📍 **[View the Live Flood Risk Map](https://Suvamp.githuh.io/urban-flood-risk-harris-county/outputs/flood_vulnerability_harris_county.html)**
 
+*Hover over any census tract to see its vulnerability score, risk tier, poverty rate, and distance to nearest waterway. Toggle the LISA cluster layer on/off using the layer control.*
 
 ---
 
@@ -34,21 +35,42 @@ An end-to-end spatial machine learning pipeline that predicts flood vulnerabilit
 
 ---
 
+## Visualizations
+
+### Raw Data — FEMA Flood Zones, Census Tracts & Waterways
+![Raw Data Check](outputs/01_raw_data_check.png)
+
+### Variable Distributions — Harris County Census Tracts
+![Distributions](outputs/02_distributions.png)
+
+### Local Moran's I (LISA) — Flood Vulnerability Hotspots
+![LISA Map](outputs/03_lisa_map.png)
+*Red = HH hotspots (high vulnerability clustered together). Blue = LL coldspots. Clusters follow the Buffalo Bayou and Brays Bayou corridors through central Houston.*
+
+### Random Forest — Predicted vs. Actual Vulnerability Score
+![Predictions vs Actual](outputs/04_predictions_vs_actual.png)
+
+### Feature Importance — What Drives Flood Vulnerability?
+![Feature Importance](outputs/05_feature_importance.png)
+*FEMA flood zone coverage (0.419) and distance to water (0.391) together account for 81% of model explanatory power. Poverty rate (0.179) is the strongest socioeconomic signal.*
+
+---
+
 ## Repository Structure
 
 ```
 urban-flood-risk-harris-county/
 │
-├── Urban_Flood_Risk.ipynb          # Full reproducible analysis notebook
-├── environment.yml                 # Conda environment specification
+├── Urban_Flood_Risk.ipynb           # Full reproducible analysis notebook
+├── environment.yml                  # Conda environment specification
 ├── README.md
 │
 └── outputs/
-    ├── 01_raw_data_check.png       # 3-panel raw data visualization
-    ├── 02_distributions.png        # Variable distribution histograms
-    ├── 03_lisa_map.png             # LISA hotspot/coldspot cluster map
+    ├── 01_raw_data_check.png        # 3-panel raw data visualization
+    ├── 02_distributions.png         # Variable distribution histograms
+    ├── 03_lisa_map.png              # LISA hotspot/coldspot cluster map
     ├── 04_predictions_vs_actual.png # Random Forest evaluation plot
-    ├── 05_feature_importance.png   # Feature importance bar chart
+    ├── 05_feature_importance.png    # Feature importance bar chart
     └── flood_vulnerability_harris_county.html  # Interactive Folium web map
 ```
 
