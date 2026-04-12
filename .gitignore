@@ -46,3 +46,14 @@ desktop.ini
 .idea/
 *.swp
 *.swo
+# ── Dashboard data outputs (too large for git) ────────────────────────────────
+backend/data/*.geojson
+backend/data/*.joblib
+backend/data/*.png
+
+# ── HTTP cache ────────────────────────────────────────────────────────────────
+cache/
+*.sqlite
+
+# ── Misc docs ─────────────────────────────────────────────────────────────────
+*.docx

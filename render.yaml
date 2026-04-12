@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: flood-risk-api
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  - type: web
+    name: flood-risk-dashboard
+    env: static
+    staticPublishPath: ./frontend
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://flood-risk-api.onrender.com/api/:splat

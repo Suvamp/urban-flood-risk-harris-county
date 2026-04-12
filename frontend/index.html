@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harris County Flood Risk Intelligence Dashboard</title>
+
+  <!-- ArcGIS Maps SDK 4.29 — dark theme (CSS only in head) -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/dark/main.css" />
+
+  <!-- Dashboard styles -->
+  <link rel="stylesheet" href="assets/dashboard.css" />
+</head>
+<body>
+
+<!-- Loading overlay -->
+<div id="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-title">Harris County Flood Risk</div>
+  <div class="loading-text">Loading dashboard data...</div>
+</div>
+
+<div id="app">
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <header id="header">
+    <div class="header-left">
+      <div class="header-logo">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1C5.2 1 3 3.2 3 6c0 4 5 9 5 9s5-5 5-9c0-2.8-2.2-5-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="header-title">Harris County Flood Risk Intelligence Dashboard</div>
+        <div class="header-subtitle">Random Forest · SHAP Explainability · FEMA NFHL · Census ACS</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="header-badge">Harris County, TX</span>
+      <span class="header-badge" id="bg-count-badge">— Block Groups</span>
+      <div class="status-dot" title="API connected"></div>
+    </div>
+  </header>
+
+  <!-- ── Body ────────────────────────────────────────────────────── -->
+  <div id="body">
+
+    <!-- Map pane -->
+    <div id="map-pane">
+      <div id="mapDiv"></div>
+
+      <!-- Layer toggles -->
+      <div id="layer-controls">
+        <div class="layer-controls-title">Layers</div>
+        <label class="toggle-row">
+          <input type="checkbox" id="toggle-risk" checked />
+          <span class="toggle-label">Flood Risk Score</span>
+          <span class="toggle-swatch" style="background:linear-gradient(90deg,#FEF9C3,#DC2626,#7F1D1D);"></span>
+        </label>
+        <label class="toggle-row">
+          <input type="checkbox" id="toggle-fema" />
+          <span class="toggle-label">FEMA Flood Zones</span>
+          <span class="toggle-swatch" style="background:#0079c1;"></span>
+        </label>
+      </div>
+
+      <!-- Legend -->
+      <div id="legend">
+        <div class="legend-title">RF Flood Risk Score</div>
+        <div class="legend-bar"></div>
+        <div class="legend-labels">
+          <span>0.0 Low</span>
+          <span>0.5</span>
+          <span>1.0 High</span>
+        </div>
+      </div>
+
+      <!-- Selected BG info bubble -->
+      <div id="selected-info">
+        <div class="selected-title">Selected Block Group</div>
+        <div class="selected-row">
+          <span class="selected-key">GEOID</span>
+          <span class="selected-val" id="sel-geoid">—</span>
+        </div>
+        <div class="selected-row">
+          <span class="selected-key">Risk Score</span>
+          <span class="selected-val" id="sel-risk">—</span>
+        </div>
+        <div class="selected-row">
+          <span class="selected-key">FEMA Zone</span>
+          <span class="selected-val" id="sel-zone">—</span>
+        </div>
+        <div class="selected-row">
+          <span class="selected-key">Population</span>
+          <span class="selected-val" id="sel-pop">—</span>
+        </div>
+        <div class="selected-row">
+          <span class="selected-key">Median Income</span>
+          <span class="selected-val" id="sel-income">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div id="right-panel">
+
+      <!-- KPI cards -->
+      <div id="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Population in SFHA</div>
+          <div class="kpi-value" id="kpi-pop">—</div>
+          <div class="kpi-sub">Special Flood Hazard Area</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Area High Risk</div>
+          <div class="kpi-value" id="kpi-area">—</div>
+          <div class="kpi-sub">% of county land area</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Critical Facilities Exposed</div>
+          <div class="kpi-value" id="kpi-fac">—</div>
+          <div class="kpi-sub">hospitals, schools, EOCs</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Median Risk Score</div>
+          <div class="kpi-value" id="kpi-risk">—</div>
+          <div class="kpi-sub">RF probability</div>
+        </div>
+      </div>
+
+      <!-- SHAP chart -->
+      <div id="shap-section">
+        <div class="panel-section-header">
+          <span class="panel-section-title">SHAP Feature Contributions</span>
+          <span class="panel-section-hint" id="shap-hint">Click a block group</span>
+        </div>
+        <div id="shap-chart">
+          <div id="shap-placeholder">
+            <div class="placeholder-icon">↖</div>
+            <div class="placeholder-text">Click any block group on the map to see why it received its risk score.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scatter chart -->
+      <div id="scatter-section">
+        <div class="panel-section-header">
+          <span class="panel-section-title">Risk vs. Socioeconomic Vulnerability</span>
+          <span class="panel-section-hint">Bubble size = population</span>
+        </div>
+        <div id="scatter-chart"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  <!-- Plotly MUST load before ArcGIS SDK to avoid Dojo AMD conflict -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script src="assets/dashboard.js"></script>
+
+</body>
+</html>
