@@ -2,7 +2,7 @@
 
 const API = window.location.hostname === 'localhost'
   ? 'http://localhost:8000'
-  : '';
+  : 'https://flood-risk-api.onrender.com';
 
 const FEATURE_LABELS = {
   f_elevation:  'Low Elevation',
