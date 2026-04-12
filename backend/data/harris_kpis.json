@@ -1,0 +1,19 @@
+{
+  "pop_in_sfha": 707445,
+  "pct_area_sfha": 5.2,
+  "facilities_exposed": 2,
+  "median_risk_score": 0.279,
+  "high_risk_bg_count": 1145,
+  "total_bg_count": 2830,
+  "county": "Harris County, TX",
+  "model": "Random Forest (300 trees)",
+  "features": [
+    "f_elevation",
+    "f_impervious",
+    "f_waterway",
+    "f_fema",
+    "f_income",
+    "f_renters",
+    "f_popdensity"
+  ]
+}
