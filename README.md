@@ -19,7 +19,7 @@ This repository contains two complementary notebooks and a full-stack web deploy
 
 ## Live Dashboard
 
-> 📍 **[Launch the Flood Risk Intelligence Dashboard](https://flood-risk-dashboard.onrender.com)**
+> 📍 **[Launch the Flood Risk Intelligence Dashboard](https://flood-risk-dashboard-wdjy.onrender.com/)**
 
 *Click any block group to see its SHAP feature contributions — the model's explanation of why that neighborhood has its risk score. Toggle FEMA flood zones as a comparison layer.*
 
