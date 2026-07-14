@@ -4,7 +4,17 @@ channels:
   - defaults
 dependencies:
   - python=3.11
-  - pip
+  - pip:
+    - folium
+    - pysal
+    - shap
+    - census
+    - py3dep
+    - pynhd
+    - rioxarray
+    - plotly
+    - fastapi
+    - uvicorn
 
   # ── Core geospatial stack (must be conda-forge for C-library bindings) ────
   - geopandas=0.14
@@ -43,3 +53,8 @@ dependencies:
   - pip:
     - folium
     - pysal
+    - shap
+    - census
+    - py3dep
+    - pynhd
+    - rioxarray
